@@ -2,304 +2,854 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>I'm Sorry ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<title>For My Love ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background:
+        radial-gradient(circle at top, #5b163d 0%, #260b25 45%, #090414 100%);
+    color: white;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {
+        opacity: 0.2;
+        transform: scale(0.7);
     }
 
-    body {
-      min-height: 100vh;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color: #5a2430;
-    }
-
-    .hearts span {
-      position: fixed;
-      bottom: -50px;
-      font-size: 25px;
-      animation: float 8s linear infinite;
-      opacity: 0.7;
-      z-index: 0;
-    }
-
-    .hearts span:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .hearts span:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .hearts span:nth-child(3) { left: 40%; animation-delay: 4s; }
-    .hearts span:nth-child(4) { left: 60%; animation-delay: 1s; }
-    .hearts span:nth-child(5) { left: 75%; animation-delay: 3s; }
-    .hearts span:nth-child(6) { left: 90%; animation-delay: 5s; }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 0.8;
-      }
-
-      100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .container {
-      width: 90%;
-      max-width: 650px;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 40px 30px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(100, 30, 50, 0.25);
-      position: relative;
-      z-index: 2;
-      animation: appear 1.5s ease;
-    }
-
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-      }
-
-      to {
+    to {
         opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+        transform: scale(1.4);
+    }
+}
+
+/* =========================
+   START SCREEN
+========================= */
+
+.start-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    padding: 25px;
+}
+
+.start-content {
+    max-width: 650px;
+    animation: fadeUp 1.5s ease;
+}
+
+.small-text {
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #ffc7dc;
+    margin-bottom: 20px;
+}
+
+.start-content h1 {
+    font-size: clamp(42px, 9vw, 80px);
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #fff, #ff9fc4, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.start-content p {
+    color: #f4cddd;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.envelope {
+    position: relative;
+    width: 210px;
+    height: 145px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 15px 25px rgba(255, 0, 100, 0.25));
+}
+
+.envelope:hover {
+    transform: scale(1.06);
+}
+
+.envelope-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #ff527f, #b81758);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.envelope-body::before,
+.envelope-body::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.envelope-body::before {
+    left: 0;
+    border-width: 0 105px 75px 0;
+    border-color: transparent #e52c68 transparent transparent;
+}
+
+.envelope-body::after {
+    right: 0;
+    border-width: 75px 105px 0 0;
+    border-color: #d92461 transparent transparent transparent;
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 105px solid transparent;
+    border-right: 105px solid transparent;
+    border-top: 78px solid #ff7298;
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 4;
+}
+
+.heart-seal {
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    z-index: 5;
+    animation: heartbeat 1.2s infinite;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open {
+    cursor: default;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.open-button {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff4f81, #ff82aa);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 50, 120, 0.3);
+    transition: 0.3s;
+}
+
+.open-button:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 15px 35px rgba(255, 50, 120, 0.45);
+}
+
+/* =========================
+   LETTER SECTION
+========================= */
+
+.letter-section {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    z-index: 3;
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.letter-section.show {
+    display: block;
+    animation: fadeUp 1.5s ease;
+}
+
+.letter-container {
+    width: 100%;
+    max-width: 720px;
+    margin: auto;
+}
+
+.letter-container h2 {
+    font-size: clamp(34px, 7vw, 55px);
+    margin-bottom: 10px;
+}
+
+.letter-subtitle {
+    color: #ffb5ce;
+    margin-bottom: 35px;
+    font-size: 17px;
+}
+
+.letter {
+    background: rgba(255, 248, 250, 0.97);
+    color: #4a1c2d;
+    border-radius: 25px;
+    padding: 40px 35px;
+    text-align: left;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(255, 75, 130, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.letter::before {
+    content: "♥";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 100px;
+    color: rgba(230, 60, 110, 0.05);
+}
+
+.letter p {
+    font-size: 17px;
+    line-height: 1.9;
+    margin-bottom: 18px;
+}
+
+.letter .hello {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d52f67;
+}
+
+.signature {
+    margin-top: 30px;
+    text-align: right;
+    font-weight: bold;
+    color: #b52059;
+}
+
+/* =========================
+   TYPEWRITER
+========================= */
+
+.typewriter {
+    min-height: 30px;
+    font-size: 18px;
+    color: #b52059;
+    font-weight: 600;
+}
+
+/* =========================
+   FORGIVE BUTTON
+========================= */
+
+.question {
+    margin-top: 45px;
+}
+
+.question h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.yes-button,
+.hug-button {
+    border: none;
+    padding: 15px 28px;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yes-button {
+    background: linear-gradient(90deg, #ff3973, #ff6e9a);
+}
+
+.hug-button {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.yes-button:hover,
+.hug-button:hover {
+    transform: scale(1.08);
+}
+
+.response {
+    display: none;
+    margin-top: 30px;
+    font-size: 23px;
+    color: #ffd3e2;
+    animation: pop 0.6s ease;
+}
+
+.response.show {
+    display: block;
+}
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px;
+    pointer-events: none;
+    z-index: 20;
+    animation: floatHeart 5s linear forwards;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.7);
+        opacity: 0;
     }
 
-    .heart {
-      font-size: 65px;
-      animation: heartbeat 1.3s infinite;
-      margin-bottom: 15px;
+    10% {
+        opacity: 1;
     }
 
-    @keyframes heartbeat {
-      0%, 100% {
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg)
+            scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.25);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
         transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.2);
-      }
     }
+}
 
-    h1 {
-      font-size: 38px;
-      margin-bottom: 20px;
-    }
+/* =========================
+   MOBILE
+========================= */
 
-    .subtitle {
-      font-size: 18px;
-      margin-bottom: 25px;
-      color: #8b4554;
-    }
+@media (max-width: 600px) {
 
     .letter {
-      background: #fff5f7;
-      padding: 25px;
-      border-radius: 18px;
-      text-align: left;
-      line-height: 1.8;
-      font-size: 17px;
-      box-shadow: inset 0 0 15px rgba(200, 80, 100, 0.08);
+        padding: 28px 22px;
     }
 
     .letter p {
-      margin-bottom: 15px;
+        font-size: 16px;
     }
 
-    .signature {
-      text-align: right;
-      font-weight: bold;
-      font-size: 18px;
+    .envelope {
+        transform: scale(0.9);
     }
 
-    button {
-      margin-top: 25px;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 30px;
-      background: #e75480;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 7px 15px rgba(180, 40, 80, 0.25);
+    .envelope:hover {
+        transform: scale(0.94);
     }
 
-    button:hover {
-      transform: scale(1.08);
-      background: #d63d6b;
+    .question h3 {
+        font-size: 25px;
     }
-
-    #reply {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-      display: none;
-      animation: pop 0.6s ease;
-    }
-
-    @keyframes pop {
-      from {
-        transform: scale(0);
-      }
-
-      to {
-        transform: scale(1);
-      }
-    }
-
-    .footer {
-      margin-top: 20px;
-      font-size: 14px;
-      color: #9a5b68;
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        padding: 30px 18px;
-      }
-
-      h1 {
-        font-size: 30px;
-      }
-
-      .letter {
-        font-size: 15px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Floating Hearts -->
-  <div class="hearts">
-    <span>❤️</span>
-    <span>💕</span>
-    <span>💗</span>
-    <span>💖</span>
-    <span>❤️</span>
-    <span>💞</span>
-  </div>
+<!-- =========================
+     BACKGROUND
+========================= -->
 
-  <div class="container">
+<div class="background" id="stars"></div>
 
-    <div class="heart">❤️</div>
 
-    <h1>I'm Sorry, My Love 🥺</h1>
+<!-- =========================
+     START SCREEN
+========================= -->
 
-    <div class="subtitle">
-      I know you're going through a difficult time, and I just want you to know...
-    </div>
+<section class="start-screen" id="startScreen">
 
-    <div class="letter">
+    <div class="start-content">
 
-      <p>Hey Love, ❤️</p>
+        <div class="small-text">
+            A little message from my heart
+        </div>
 
-      <p>
-        I'm really sorry if I hurt you or made you upset.
-        That was never my intention.
-      </p>
+        <h1>For My Love ❤️</h1>
 
-      <p>
-        I know you're already dealing with a lot right now,
-        and the last thing I ever want is to make your day harder.
-      </p>
+        <p>
+            I made something small for you...
+            because you deserve a little extra love today. 🥺
+        </p>
 
-      <p>
-        So please take care of yourself, get some rest,
-        stay comfortable, and remember that you don't have to
-        handle everything alone. 🫂
-      </p>
+        <div class="envelope-wrapper">
 
-      <p>
-        I may not always say the perfect thing,
-        but I genuinely care about you more than you know.
-      </p>
+            <div class="envelope" id="envelope">
 
-      <p>
-        If I could, I'd give you a big warm hug right now,
-        bring you your favorite things,
-        and just sit beside you until you feel better. ❤️
-      </p>
+                <div class="envelope-body"></div>
 
-      <p>
-        I'm sorry, sweetheart.
-        Please don't stay angry with me for too long. 🥺
-      </p>
+                <div class="flap"></div>
 
-      <p class="signature">
-        Always yours ❤️<br>
-        Your Idiot 🫣
-      </p>
+                <div class="heart-seal">
+                    ❤️
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="open-button" onclick="openLetter()">
+            💌 Open My Letter
+        </button>
 
     </div>
 
-    <button onclick="forgiveMe()">
-      Can I Get a Hug? 🫂
-    </button>
+</section>
 
-    <div id="reply">
-      Yayyy! 🥹❤️ I owe you the biggest hug ever! 🫂💕
+
+<!-- =========================
+     LETTER
+========================= -->
+
+<section class="letter-section" id="letterSection">
+
+    <div class="letter-container">
+
+        <div class="small-text">
+            From my heart to yours
+        </div>
+
+        <h2>I'm Sorry, My Love 🥺❤️</h2>
+
+        <div class="letter-subtitle">
+            Please read this until the end...
+        </div>
+
+
+        <div class="letter">
+
+            <p class="hello">
+                Hey My Love ❤️
+            </p>
+
+            <p>
+                I know you might not be feeling your best right now,
+                and the last thing I ever wanted was to make things
+                harder for you.
+            </p>
+
+            <p>
+                If something I said or did hurt you,
+                <strong>I'm genuinely sorry.</strong>
+                I never want my words or actions to become a reason
+                for that beautiful smile to disappear.
+            </p>
+
+            <p>
+                I know I am not perfect.
+                Sometimes I say the wrong thing,
+                sometimes I don't understand things the way I should,
+                and sometimes I become a complete idiot. 🥲
+            </p>
+
+            <p>
+                But one thing I hope you never doubt is how much
+                I care about you.
+            </p>
+
+            <p>
+                If I could be beside you right now,
+                I'd give you the biggest, warmest hug,
+                get you whatever makes you comfortable,
+                and simply stay beside you.
+                No arguments. No unnecessary words.
+                Just me being there for you. 🫂❤️
+            </p>
+
+            <p>
+                So please take care of yourself,
+                rest as much as you can,
+                and remember that you don't have to pretend
+                to be okay around me.
+            </p>
+
+            <p>
+                You can be angry.
+                You can be emotional.
+                You can have a bad day.
+                You can complain about everything.
+                I'll still care about you. ❤️
+            </p>
+
+            <p>
+                And once again...
+                <strong>I'm really, really sorry.</strong>
+            </p>
+
+            <p class="typewriter" id="typewriter"></p>
+
+            <p class="signature">
+                Always yours ❤️<br>
+                Your favorite idiot 🫣
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             QUESTION
+        ========================= -->
+
+        <div class="question">
+
+            <h3>
+                Can I have a little forgiveness? 🥺
+            </h3>
+
+            <div class="buttons">
+
+                <button class="yes-button" onclick="forgive()">
+                    ❤️ Of course
+                </button>
+
+                <button class="hug-button" onclick="hug()">
+                    🫂 You owe me a hug
+                </button>
+
+            </div>
+
+            <div class="response" id="response"></div>
+
+        </div>
+
     </div>
 
-    <div class="footer">
-      Made with ❤️ just for you
-    </div>
+</section>
 
-  </div>
 
-  <script>
-    function forgiveMe() {
-      const reply = document.getElementById("reply");
+<script>
 
-      reply.style.display = "block";
+/* =========================
+   CREATE STARS
+========================= */
 
-      // Create extra hearts
-      for (let i = 0; i < 15; i++) {
-        const heart = document.createElement("div");
+const starsContainer = document.getElementById("stars");
 
-        heart.innerHTML = "❤️";
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.bottom = "0";
-        heart.style.fontSize = (15 + Math.random() * 30) + "px";
-        heart.style.zIndex = "10";
-        heart.style.transition = "transform 4s ease, opacity 4s ease";
+for (let i = 0; i < 90; i++) {
 
-        document.body.appendChild(heart);
+    const star = document.createElement("div");
 
-        setTimeout(() => {
-          heart.style.transform =
-            "translateY(-100vh) rotate(" +
-            (Math.random() * 720 - 360) +
-            "deg)";
+    star.classList.add("star");
 
-          heart.style.opacity = "0";
-        }, 100);
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
 
-        setTimeout(() => {
-          heart.remove();
-        }, 4500);
-      }
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    starsContainer.appendChild(star);
+}
+
+
+/* =========================
+   OPEN LETTER
+========================= */
+
+function openLetter() {
+
+    const envelope =
+        document.getElementById("envelope");
+
+    const startScreen =
+        document.getElementById("startScreen");
+
+    const letterSection =
+        document.getElementById("letterSection");
+
+    envelope.classList.add("open");
+
+    createHeartExplosion();
+
+    setTimeout(() => {
+
+        startScreen.style.display = "none";
+
+        letterSection.classList.add("show");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+        startTyping();
+
+    }, 1300);
+}
+
+
+/* =========================
+   TYPEWRITER
+========================= */
+
+function startTyping() {
+
+    const text =
+        "No matter what happens, I want you to know that you are very special to me. ❤️";
+
+    const element =
+        document.getElementById("typewriter");
+
+    let index = 0;
+
+    function type() {
+
+        if (index < text.length) {
+
+            element.innerHTML += text.charAt(index);
+
+            index++;
+
+            setTimeout(type, 45);
+
+        }
     }
-  </script>
+
+    type();
+}
+
+
+/* =========================
+   FORGIVE BUTTON
+========================= */
+
+function forgive() {
+
+    const response =
+        document.getElementById("response");
+
+    response.innerHTML =
+        "You just made my heart so happy. 🥹❤️<br><br>" +
+        "Come here... I owe you the biggest hug ever! 🫂💕";
+
+    response.classList.add("show");
+
+    createManyHearts();
+}
+
+
+/* =========================
+   HUG BUTTON
+========================= */
+
+function hug() {
+
+    const response =
+        document.getElementById("response");
+
+    response.innerHTML =
+        "Deal! 🫂❤️<br><br>" +
+        "One giant hug coming your way... 🤗💕";
+
+    response.classList.add("show");
+
+    createManyHearts();
+}
+
+
+/* =========================
+   FLOATING HEART
+========================= */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "floating-heart";
+
+    const hearts = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💓",
+        "💞",
+        "🥰"
+    ];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        (18 + Math.random() * 28) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+}
+
+
+/* =========================
+   MANY HEARTS
+========================= */
+
+function createManyHearts() {
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(() => {
+            createHeart();
+        }, i * 100);
+
+    }
+}
+
+
+/* =========================
+   HEART EXPLOSION
+========================= */
+
+function createHeartExplosion() {
+
+    for (let i = 0; i < 25; i++) {
+
+        setTimeout(() => {
+            createHeart();
+        }, i * 60);
+
+    }
+}
+
+
+/* =========================
+   CONTINUOUS HEARTS
+========================= */
+
+setInterval(() => {
+
+    if (
+        document.getElementById("letterSection")
+            .classList.contains("show")
+    ) {
+
+        createHeart();
+
+    }
+
+}, 1800);
+
+</script>
 
 </body>
 </html>
